@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using TMPro;
 
 public class player : MonoBehaviour
 {
@@ -21,8 +22,12 @@ public class player : MonoBehaviour
     private GameObject bottomSlider;
     private GameObject highButton;
     private GameObject lowButton;
-    public GameObject topBox;
-    public GameObject bottomBox;
+    private GameObject topBox;
+    private GameObject bottomBox;
+
+    public GameObject topCalories;
+    public GameObject bottomCalories;
+
 
     void Start()
     {
@@ -40,11 +45,16 @@ public class player : MonoBehaviour
         highButton = GameObject.FindGameObjectWithTag("high");
         lowButton = GameObject.FindGameObjectWithTag("low");
 
+        topCalories = GameObject.FindGameObjectWithTag("topCal");
+        bottomCalories = GameObject.FindGameObjectWithTag("bottomCal");
+
         
 
 
 
         loseScreen.SetActive(false);
+        topCalories.SetActive(false);
+        bottomCalories.SetActive(false);
 
 
 
@@ -82,18 +92,29 @@ public class player : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        topCalories.SetActive(true);
+        bottomCalories.SetActive(true);
+
         highButton.GetComponent<buttonBehaviour>().showButtons();
         lowButton.GetComponent<buttonBehaviour>().showButtons();
 
-        Debug.Log(foodData[currFood].getCalories());
-        Debug.Log(foodData[nextFood].getCalories());
+
+        yield return new WaitForSeconds(0.5f);
+
+        topCalories.GetComponent<TextMeshPro>().text = "Calories: " + foodData[currFood].getCalories();
+        bottomCalories.GetComponent<TextMeshPro>().text = "Calories: " + foodData[nextFood].getCalories();
+
+        //Debug.Log(foodData[currFood].getCalories());
+        //Debug.Log(foodData[nextFood].getCalories());
     }
 
     public void highClick()
     {
+        highButton.GetComponent<buttonBehaviour>().hideButtons();
+        lowButton.GetComponent<buttonBehaviour>().hideButtons();
         if (foodData[nextFood].getCalories() >= foodData[currFood].getCalories())
         {
-            correct();
+            StartCoroutine(correct());
         }
         else
         {
@@ -103,6 +124,8 @@ public class player : MonoBehaviour
 
     public void lowClick()
     {
+        highButton.GetComponent<buttonBehaviour>().hideButtons();
+        lowButton.GetComponent<buttonBehaviour>().hideButtons();
         if (foodData[nextFood].getCalories() <= foodData[currFood].getCalories())
         {
             StartCoroutine(correct());

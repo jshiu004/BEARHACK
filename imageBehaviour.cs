@@ -39,12 +39,18 @@ public class imageBehaviour : MonoBehaviour
 
     public void slideOut()
     {
+        //if (tag == "top") { transform.position = topStart; } else { transform.position = bottomEnd; }
+        percent = 0f;
+        elapsedTime = 0f;
         slideState = false;
 
     }
 
     public void slideIn()
     {
+        //if (tag == "top") { transform.position = topEnd; } else { transform.position = bottomEnd; }
+        percent = 0f;
+        elapsedTime = 0f;
         slideState = true;
 
 
@@ -79,7 +85,7 @@ public class imageBehaviour : MonoBehaviour
         } else {
             if (tag == "top")
             {
-            // Debug.Log("workingTop");
+           
 
                 elapsedTime += Time.deltaTime;
 
@@ -90,7 +96,7 @@ public class imageBehaviour : MonoBehaviour
             }
             else
             {
-            //  Debug.Log("workingBottom");
+            
 
                 elapsedTime += Time.deltaTime;
 
