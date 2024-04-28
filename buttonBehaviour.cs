@@ -9,10 +9,15 @@ public class buttonBehaviour : MonoBehaviour
     // Start is called before the first frame update
     private Image buttonImg;
     private TextMeshProUGUI text;
+
+    private player gameManager;
+
     void Start()
     {
         buttonImg = gameObject.GetComponent<Image>();
         text = gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        gameManager = GameObject.FindGameObjectWithTag("manager").GetComponent<player>();
 
         hideButtons();
 
@@ -26,13 +31,13 @@ public class buttonBehaviour : MonoBehaviour
 
     public void OnHighClick()
     {
-        highClick();
+        gameManager.highClick();
 
     }
 
     public void OnLowClick()
     {
-        lowClick();
+        gameManager.lowClick();
     }
 
 
