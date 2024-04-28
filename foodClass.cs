@@ -1,6 +1,4 @@
 
-
-
 class Food {
     private string name;
     private int calories;
