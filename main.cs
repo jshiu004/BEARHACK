@@ -1,6 +1,7 @@
 using System.IO;
 #include "foodClass.cs";
 
+
 Food[] readFiles() {
     string caloriesString, name;
 
@@ -27,6 +28,12 @@ Food randomFood() {
     int index = rnd.Next(0, 49);
     return foods[index];
 }
+
+static void Main(string[] args) {
+    Food a = randomFood();
+    Console.WriteLine(a.printCals());
+}
+
 
 
 
