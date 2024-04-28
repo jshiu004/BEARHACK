@@ -26,12 +26,13 @@ public class buttonBehaviour : MonoBehaviour
 
     public void OnHighClick()
     {
+        highClick();
 
     }
 
     public void OnLowClick()
     {
-
+        lowClick();
     }
 
 
