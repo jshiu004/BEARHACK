@@ -6,6 +6,8 @@ public class imageBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
     private bool isTop = false;
+    private bool slideState = false;
+
     private Vector3 topEnd = new Vector3(0f, 2.58f, 0f);
     private Vector3 bottomEnd = new Vector3(0f, -2.55f, 0f);
 
@@ -25,7 +27,6 @@ public class imageBehaviour : MonoBehaviour
         {
             isTop = false;
         }
-        Debug.Log("working");
         setUp();
     }
 
@@ -39,45 +40,73 @@ public class imageBehaviour : MonoBehaviour
         {
             transform.position = bottomStart;
         }
-        Debug.Log("working 2");
-
 
         //testing
         slideIn();
     }
 
 
+
     public void slideOut()
     {
-
+        slideState = false;
+        this.enabled = true;
     }
 
     public void slideIn()
     {
+        slideState = true;
         this.enabled = true;
     }
+
+    
+
     void FixedUpdate()
     {
-        if (isTop)
-        {
-           // Debug.Log("workingTop");
+        if (slideState) {
+            if (isTop)
+            {
+            // Debug.Log("workingTop");
 
-            elapsedTime += Time.deltaTime;
+                elapsedTime += Time.deltaTime;
 
-            percent = elapsedTime / animationTime;
+                percent = elapsedTime / animationTime;
 
-            transform.position = Vector3.Lerp(topStart, topEnd, Mathf.SmoothStep(0f, 1f, percent));
+                transform.position = Vector3.Lerp(topStart, topEnd, Mathf.SmoothStep(0f, 1f, percent));
 
-        }
-        else
-        {
-          //  Debug.Log("workingBottom");
+            }
+            else
+            {
+            //  Debug.Log("workingBottom");
 
-            elapsedTime += Time.deltaTime;
+                elapsedTime += Time.deltaTime;
 
-            percent = elapsedTime / animationTime;
+                percent = elapsedTime / animationTime;
 
-            transform.position = Vector3.Lerp(bottomStart, bottomEnd, Mathf.SmoothStep(0f, 1f, percent));
+                transform.position = Vector3.Lerp(bottomStart, bottomEnd, Mathf.SmoothStep(0f, 1f, percent));
+            }
+        } else {
+            if (isTop)
+            {
+            // Debug.Log("workingTop");
+
+                elapsedTime += Time.deltaTime;
+
+                percent = elapsedTime / animationTime;
+
+                transform.position = Vector3.Lerp(topEnd, topStart, Mathf.SmoothStep(0f, 1f, percent));
+
+            }
+            else
+            {
+            //  Debug.Log("workingBottom");
+
+                elapsedTime += Time.deltaTime;
+
+                percent = elapsedTime / animationTime;
+
+                transform.position = Vector3.Lerp(bottomEnd, bottomStart, Mathf.SmoothStep(0f, 1f, percent));
+            }
         }
     }
 }

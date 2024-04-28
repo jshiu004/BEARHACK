@@ -1,5 +1,5 @@
 
-class Food {
+public class Food {
     private string name;
     private int calories;
 
@@ -7,6 +7,9 @@ class Food {
         name = n;
         calories = cal;
     }
+
+    public string getName() { return name; }
+    public int getCalories() { return calories; }
 
     public string printCals() {
         return name + ": " + calories + " calories.";
