@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player : MonoBehaviour
 {
@@ -11,17 +12,24 @@ public class player : MonoBehaviour
 
     private Food currFood;
     private Food nextFood;
+
+    private GameObject loseScreen;
+
     void Start()
     {
         mainClass = new main();
         foodData = mainClass.readFiles();
 
+        loseScreen = GameObject.FindGameObjectWithTag("loseScreen");
+
+        loseScreen.SetActive(false);
 
         startGame();
     }
 
     private void startGame()
     {
+        lose();
         currFood = mainClass.randomFood(ref foodData);
 
         nextFood = mainClass.randomFood(ref foodData);
@@ -39,7 +47,8 @@ public class player : MonoBehaviour
         if (nextFood.getCalories() >= currFood.getCalories())
         {
             correct();
-        } else
+        }
+        else
         {
             lose();
         }
@@ -57,14 +66,30 @@ public class player : MonoBehaviour
         }
     }
 
-    public void correct() {
-        currfood = nextfood;
+    public void correct()
+    {
+        currFood = nextFood;
         nextFood = mainClass.randomFood(ref foodData);
+
+        while (currFood == nextFood)
+        {
+            nextFood = mainClass.randomFood(ref foodData);
+        }
     }
 
-    public void lose() {
-        
+    public void lose()
+    {
+        StartCoroutine(loseFade());
     }
+
+    private IEnumerator loseFade()
+    {
+        yield return new WaitForSeconds(5f);
+
+        loseScreen.SetActive(true);
+    }
+
+
 
 
 }
