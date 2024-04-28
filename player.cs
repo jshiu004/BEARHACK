@@ -57,7 +57,14 @@ public class player : MonoBehaviour
         }
     }
 
+    public void correct() {
+        currfood = nextfood;
+        nextFood = mainClass.randomFood(ref foodData);
+    }
 
+    public void lose() {
+        
+    }
 
 
 }
