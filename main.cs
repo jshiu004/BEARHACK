@@ -18,3 +18,17 @@ Food[] readFiles() {
     }
     return listOfFoods;
 }
+
+
+Food randomFood() {
+    Food[] foods = readFiles();
+
+    Random rnd = new Random();
+    int index = rnd.Next(0, 49);
+    return foods[index];
+
+}
+
+
+
+
