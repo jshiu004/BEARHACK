@@ -8,6 +8,8 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     private Food[] foodData;
     private main mainClass;
+    public string folderPath = "Assets/foodpics"; // Relative path to the folder containing sprites
+    private Sprite[] foodSprites; // Array to hold the loaded sprites
 
 
     private Food currFood;
@@ -24,6 +26,20 @@ public class player : MonoBehaviour
 
         loseScreen.SetActive(false);
 
+        Object[] loadedAssets = AssetDatabase.LoadAllAssetsAtPath(folderPath);
+
+        // Filter out sprites from the loaded assets
+        List<Sprite> spriteList = new List<Sprite>();
+        foreach (Object asset in loadedAssets)
+        {
+            if (asset is Sprite)
+            {
+                spriteList.Add((Sprite)asset);
+            }
+        }
+
+        // Convert the list to an array
+        foodSprites = spriteList.ToArray();
         startGame();
     }
 
