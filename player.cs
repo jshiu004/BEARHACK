@@ -74,7 +74,7 @@ public class player : MonoBehaviour
         while (currFood == nextFood)
         {
             nextFood = mainClass.randomFood(ref foodData);
-        }
+        }       
     }
 
     public void lose()
