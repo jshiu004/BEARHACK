@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class player : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class player : MonoBehaviour
     private int currFood;
     private int nextFood;
 
+
+    public int score = 0;
+
     private GameObject loseScreen;
     private GameObject topSlider;
     private GameObject bottomSlider;
@@ -24,9 +28,9 @@ public class player : MonoBehaviour
     private GameObject lowButton;
     private GameObject topBox;
     private GameObject bottomBox;
-
     public GameObject topCalories;
     public GameObject bottomCalories;
+    public GameObject scoreText;
 
 
     void Start()
@@ -48,7 +52,9 @@ public class player : MonoBehaviour
         topCalories = GameObject.FindGameObjectWithTag("topCal");
         bottomCalories = GameObject.FindGameObjectWithTag("bottomCal");
 
-        
+        scoreText = GameObject.FindGameObjectWithTag("score");
+
+
 
 
 
@@ -82,7 +88,7 @@ public class player : MonoBehaviour
 
     private IEnumerator setImages()
     {
-        
+
         topSlider.GetComponent<SpriteRenderer>().sprite = foodSprites[currFood];
 
         bottomSlider.GetComponent<SpriteRenderer>().sprite = foodSprites[nextFood];
@@ -138,8 +144,10 @@ public class player : MonoBehaviour
 
     public IEnumerator correct()
     {
+        score++;
 
-        yield return new WaitForSeconds(2f);
+
+        yield return new WaitForSeconds(0.5f);
         topBox.GetComponent<imageBehaviour>().slideOut();
         bottomBox.GetComponent<imageBehaviour>().slideOut();
         yield return new WaitForSeconds(3f);
@@ -162,9 +170,20 @@ public class player : MonoBehaviour
 
     private IEnumerator loseDelay()
     {
+
+        yield return new WaitForSeconds(0.5f);
+        topBox.GetComponent<imageBehaviour>().slideOut();
+        bottomBox.GetComponent<imageBehaviour>().slideOut();
+
         yield return new WaitForSeconds(5f);
 
         loseScreen.SetActive(true);
+        scoreText.GetComponent<TextMeshProUGUI>().text = "Score: " + score;
+    }
+
+    public void exitGame()
+    {
+        SceneManager.LoadScene("StartScreen");
     }
 
 

@@ -85,7 +85,7 @@ public class imageBehaviour : MonoBehaviour
         } else {
             if (tag == "top")
             {
-           
+
 
                 elapsedTime += Time.deltaTime;
 
@@ -96,7 +96,7 @@ public class imageBehaviour : MonoBehaviour
             }
             else
             {
-            
+
 
                 elapsedTime += Time.deltaTime;
 
