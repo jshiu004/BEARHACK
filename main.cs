@@ -1,33 +1,36 @@
 using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+#include "foodClass.cs";
 
-public class main : MonoBehaviour
-{
 
-    public Food[] readFiles()
-    {
-        string caloriesString, name;
+Food[] readFiles() {
+    string caloriesString, name;
 
-        int numFoods = 50;
-        Food[] listOfFoods = new Food[numFoods];
-        const string path = "foods.txt";
-        StreamReader reader = new StreamReader(path);
+    int numFoods = 50;
+    Food [] listOfFoods = new Food[numFoods];
+    const string path = "foods.txt";
+    StreamReader reader = new StreamReader(path);
 
-        for (int i = 0; i < numFoods; i++)
-        {
-            name = reader.ReadLine();
-            caloriesString = reader.ReadLine();
-            if (int.TryParse(caloriesString, out int calories))
-            {
-                listOfFoods[i] = new Food(name, calories);
-            }
+    for(int i = 0; i < numFoods; i++) {
+        name = reader.ReadLine();
+        caloriesString = reader.ReadLine();
+        if(int.TryParse(caloriesString, out int calories)) {
+            listOfFoods[i] = new Food(name, calories);
         }
-        return listOfFoods;
     }
+    return listOfFoods;
+}
 
 
+Food randomFood() {
+    Food[] foods = readFiles();
 
+    Random rnd = new Random();
+    int index = rnd.Next(0, 49);
+    return foods[index];
+}
+
+static void Main(string[] args) {
+    Food a = randomFood();
+    Console.WriteLine(a.printCals());
 }
 
