@@ -5,7 +5,6 @@ using UnityEngine;
 public class imageBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
-    private bool isTop = false;
     private bool slideState = false;
 
     private Vector3 topEnd = new Vector3(0f, 2.58f, 0f);
@@ -19,21 +18,14 @@ public class imageBehaviour : MonoBehaviour
     private float percent = 0f;
     void Start()
     {
-        this.enabled = false;
-        if (this.tag == "top")
-        {
-            isTop = true;
-        } else
-        {
-            isTop = false;
-        }
+
         setUp();
     }
 
 
     private void setUp()
     {
-        if (isTop)
+        if (tag == "top")
         {
             transform.position = topStart;
         } else
@@ -41,8 +33,6 @@ public class imageBehaviour : MonoBehaviour
             transform.position = bottomStart;
         }
 
-        //testing
-        slideIn();
     }
 
 
@@ -50,13 +40,14 @@ public class imageBehaviour : MonoBehaviour
     public void slideOut()
     {
         slideState = false;
-        this.enabled = true;
+
     }
 
     public void slideIn()
     {
         slideState = true;
-        this.enabled = true;
+
+
     }
 
     
@@ -64,9 +55,9 @@ public class imageBehaviour : MonoBehaviour
     void FixedUpdate()
     {
         if (slideState) {
-            if (isTop)
+            if (tag == "top")
             {
-            // Debug.Log("workingTop");
+
 
                 elapsedTime += Time.deltaTime;
 
@@ -77,7 +68,7 @@ public class imageBehaviour : MonoBehaviour
             }
             else
             {
-            //  Debug.Log("workingBottom");
+
 
                 elapsedTime += Time.deltaTime;
 
@@ -86,7 +77,7 @@ public class imageBehaviour : MonoBehaviour
                 transform.position = Vector3.Lerp(bottomStart, bottomEnd, Mathf.SmoothStep(0f, 1f, percent));
             }
         } else {
-            if (isTop)
+            if (tag == "top")
             {
             // Debug.Log("workingTop");
 

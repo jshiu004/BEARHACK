@@ -11,7 +11,7 @@ public class main : MonoBehaviour
 
         int numFoods = 50;
         Food[] listOfFoods = new Food[numFoods];
-        const string path = "foods.txt";
+        const string path = "assets/scripts/foods.txt";
         StreamReader reader = new StreamReader(path);
 
         for (int i = 0; i < numFoods; i++)
@@ -27,11 +27,11 @@ public class main : MonoBehaviour
     }
 
 
-    public Food randomFood(ref Food[] foods)
+    public int randomFood()
     {
         
         int index = Random.Range(0, 50);
-        return foods[index];
+        return index;
     }
 
 

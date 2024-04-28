@@ -19,7 +19,6 @@ public class buttonBehaviour : MonoBehaviour
 
         gameManager = GameObject.FindGameObjectWithTag("manager").GetComponent<player>();
 
-        hideButtons();
 
     }
 
@@ -27,6 +26,11 @@ public class buttonBehaviour : MonoBehaviour
     public void hideButtons()
     {
         gameObject.SetActive(false);
+    }
+
+    public void showButtons()
+    {
+        gameObject.SetActive(true);
     }
 
     public void OnHighClick()
